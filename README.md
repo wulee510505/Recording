@@ -1,6 +1,24 @@
 # Recording
-快速实现录音功能
+        快速实现录音功能
 
+
+        Step 1. Add the JitPack repository to your build file
+
+
+        Add it in your root build.gradle at the end of repositories:
+
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+        
+        Step 2. Add the dependency
+
+	dependencies {
+	        compile 'com.github.wulee510505:Recording:1.0.0'
+	}
 
         RecordVoiceButton  mBtRec = (RecordVoiceButton) findViewById(R.id.button_rec);
  
