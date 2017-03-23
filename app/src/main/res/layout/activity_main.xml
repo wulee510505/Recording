@@ -1,15 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="#f2f2f2">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:layout_above="@+id/button_rec"></ListView>
+        android:overScrollMode="never"
+        android:layout_above="@+id/button_rec"/>
 
     <com.wulee.recordingibrary.view.RecordVoiceButton
         android:id="@+id/button_rec"

@@ -1,9 +1,10 @@
 package com.wulee.recording;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ListView;
-
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import com.wulee.recordingibrary.entity.Voice;
 import com.wulee.recordingibrary.view.RecordVoiceButton;
 
@@ -12,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 语音列表
      */
-    private ListView listView;
+    private RecyclerView recyclerView;
     /**
      * 开始录音
      */
@@ -26,9 +27,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mBtRec = (RecordVoiceButton) findViewById(R.id.button_rec);
-        listView = (ListView) findViewById(R.id.lv);
-        adapter=new VoiceAdapter(this);
-        listView.setAdapter(adapter);
+        recyclerView = (RecyclerView) findViewById(R.id.lv);
+        adapter = new VoiceAdapter(this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        mBtRec.setAudioSavePath(Environment.getExternalStorageDirectory().getPath()+"/Recording/audio");
         mBtRec.setEnrecordVoiceListener(new RecordVoiceButton.EnRecordVoiceListener() {
             @Override
             public void onFinishRecord(long length, String strLength, String filePath) {

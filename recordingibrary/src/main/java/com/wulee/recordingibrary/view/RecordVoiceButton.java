@@ -3,7 +3,6 @@ package com.wulee.recordingibrary.view;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Environment;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.view.View;
@@ -25,6 +24,7 @@ public class RecordVoiceButton extends AppCompatButton implements View.OnClickLi
     private Context mContext;
     private EnRecordVoiceListener enRecordVoiceListener;
     private VoiceManager voiceManager;
+    private String mPath;
 
     public RecordVoiceButton(Context context) {
         super(context);
@@ -127,7 +127,8 @@ public class RecordVoiceButton extends AppCompatButton implements View.OnClickLi
                 }
             }
         });
-        voiceManager.startVoiceRecord(Environment.getExternalStorageDirectory().getPath()+"/VoiceManager/audio");
+        voiceManager.startVoiceRecord(mPath);
+
     }
 
     /**
@@ -137,5 +138,12 @@ public class RecordVoiceButton extends AppCompatButton implements View.OnClickLi
         void onFinishRecord(long length, String strLength, String filePath);
     }
 
+    /**
+     * 设置音频保存路径
+     * @param path
+     */
+    public void setAudioSavePath(String path){
+        mPath = path;
+    }
 
 }

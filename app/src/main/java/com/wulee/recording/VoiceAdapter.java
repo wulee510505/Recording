@@ -2,13 +2,15 @@ package com.wulee.recording;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wulee.recordingibrary.entity.Voice;
+import com.wulee.recordingibrary.utils.FileUtil;
 import com.wulee.recordingibrary.utils.ViewHolderUtil;
 import com.wulee.recordingibrary.utils.VoiceManager;
 
@@ -28,17 +30,19 @@ public class VoiceAdapter extends BaseCommonAdapter<Voice> {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.item_voice_list, parent, false);
-        }
-        final ImageView ivVoic = ViewHolderUtil.get(convertView, R.id.iv_voice);
-        final LinearLayout llRoot = ViewHolderUtil.get(convertView, R.id.ll_root);
-        TextView tvLength = ViewHolderUtil.get(convertView, R.id.tv_length);
+    public ListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View convertView = mInflater.inflate(R.layout.item_voice_list, parent, false);
+        return new ListItemViewHolder(convertView);
+    }
+    @Override
+    public void onBindViewHolder(final ListItemViewHolder holder, final int position) {
+        super.onBindViewHolder(holder, position);
         final Voice voice = getData().get(position);
-        tvLength.setText(voice.getStrLength());
+        holder.tvLength.setText(voice.getStrLength());
+        holder.tvFileLengtn.setText("file_size: "+ FileUtil.byte2FitMemorySize(voice.getLength()));
+        holder.tvFilePath.setText("file_path: "+ voice.getFilePath());
         //播放
-        llRoot.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (voiceAnimation != null) {
@@ -49,7 +53,7 @@ public class VoiceAdapter extends BaseCommonAdapter<Voice> {
                     voiceManager.stopPlay();
                 }else{
                     voiceManager.stopPlay();
-                    voiceAnimation = (AnimationDrawable) ivVoic.getBackground();
+                    voiceAnimation = (AnimationDrawable) holder.ivVoic.getBackground();
                     voiceAnimation.start();
                     voiceManager.setVoicePlayListener(new VoiceManager.VoicePlayCallBack() {
                         @Override
@@ -83,10 +87,23 @@ public class VoiceAdapter extends BaseCommonAdapter<Voice> {
                     voiceManager.startPlay(voice.getFilePath());
                 }
                 lastPosition = position;
-
             }
         });
+    }
 
-        return convertView;
+    public class ListItemViewHolder extends RecyclerView.ViewHolder{
+        private ImageView ivVoic;
+        private CardView cardView;
+        private TextView tvLength;
+        private TextView tvFileLengtn;
+        private TextView tvFilePath;
+        public ListItemViewHolder(View convertView) {
+            super(convertView);
+            ivVoic = ViewHolderUtil.get(convertView, R.id.iv_voice);
+            cardView = ViewHolderUtil.get(convertView, R.id.card_view);
+            tvLength = ViewHolderUtil.get(convertView, R.id.tv_length);
+            tvFileLengtn = ViewHolderUtil.get(convertView, R.id.tv_filelength);
+            tvFilePath = ViewHolderUtil.get(convertView, R.id.tv_filepath);
+        }
     }
 }
