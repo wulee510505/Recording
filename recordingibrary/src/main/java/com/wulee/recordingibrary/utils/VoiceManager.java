@@ -31,6 +31,8 @@ public class VoiceManager {
     public final int MEDIA_STATE_RECORD_STOP = 210;
     public final int MEDIA_STATE_RECORD_DOING = 220;
     public final int MEDIA_STATE_RECORD_PAUSE = 230;
+    public final int MEDIA_STATE_RECORD_CANCEL = 240;
+
     public final int MEDIA_STATE_PLAY_STOP = 310;
     public final int MEDIA_STATE_PLAY_DOING = 320;
     public final int MEDIA_STATE_PLAY_PAUSE = 330;
@@ -208,6 +210,20 @@ public class VoiceManager {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 取消录音
+     */
+    public void cancelVoiceRecord() {
+        if (mDeviceState == MEDIA_STATE_RECORD_DOING) {
+            mDeviceState = MEDIA_STATE_RECORD_CANCEL;
+            stopRecorder(mMediaRecorder, true);
+            mMediaRecorder = null;
+            voiceRecordCallBack.recCancel();
         }
     }
 
@@ -717,6 +733,9 @@ public class VoiceManager {
 
         //录音结束
         void recFinish(long length, String strLength, String path);
+
+        //录音取消
+        void recCancel();
     }
 
     /**

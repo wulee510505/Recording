@@ -18,7 +18,7 @@ import com.wulee.recordingibrary.utils.VoiceManager;
 public class RecordVoiceButton extends AppCompatButton implements View.OnClickListener {
 
     private Dialog recordIndicator;
-    private ImageView mVolumeIv,mIvPauseContinue,mIvComplete;
+    private ImageView mVolumeIv,mIvPauseContinue,mIvComplete,mIvCancel;
     private VoiceLineView voicLine;
     private TextView mRecordHintTv;
     private Context mContext;
@@ -71,6 +71,7 @@ public class RecordVoiceButton extends AppCompatButton implements View.OnClickLi
         mRecordHintTv.setText("00:00:00");
         mIvPauseContinue= (ImageView) recordIndicator.findViewById(R.id.iv_continue_or_pause);
         mIvComplete= (ImageView) recordIndicator.findViewById(R.id.iv_complete);
+        mIvCancel= (ImageView) recordIndicator.findViewById(R.id.iv_cancel);
         recordIndicator.show();
         //暂停或继续
         mIvPauseContinue.setOnClickListener(new OnClickListener() {
@@ -87,6 +88,16 @@ public class RecordVoiceButton extends AppCompatButton implements View.OnClickLi
             public void onClick(View view) {
                 if(voiceManager!=null){
                     voiceManager.stopVoiceRecord();
+                }
+                recordIndicator.dismiss();
+            }
+        });
+        //取消
+        mIvCancel.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(voiceManager!=null){
+                    voiceManager.cancelVoiceRecord();
                 }
                 recordIndicator.dismiss();
             }
@@ -118,13 +129,16 @@ public class RecordVoiceButton extends AppCompatButton implements View.OnClickLi
                 mIvPauseContinue.setImageResource(R.mipmap.icon_continue);
                 voicLine.setPause();
             }
-
-
             @Override
             public void recFinish(long length, String strLength, String path) {
                 if (enRecordVoiceListener != null) {
                     enRecordVoiceListener.onFinishRecord(length, strLength, path);
                 }
+            }
+
+            @Override
+            public void recCancel() {
+
             }
         });
         voiceManager.startVoiceRecord(mPath);

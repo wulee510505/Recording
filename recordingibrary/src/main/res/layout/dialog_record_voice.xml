@@ -42,8 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="25dp"
+            android:layout_below="@id/iv_voice"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
             android:text="00:00:00"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
@@ -61,7 +62,18 @@
             android:id="@+id/iv_continue_or_pause"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
             android:src="@mipmap/icon_pause"
+            android:layout_margin="20dp"
+            android:layout_alignParentBottom="true" />
+
+
+        <ImageView
+            android:id="@+id/iv_cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:src="@mipmap/icon_cancel"
             android:layout_margin="20dp"
             android:layout_alignParentBottom="true" />
     </RelativeLayout>
