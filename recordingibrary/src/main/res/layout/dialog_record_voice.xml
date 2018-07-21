@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:voiceView="http://schemas.android.com/apk/res-auto"
     style="@style/record_voice_dialog"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical|center_horizontal"
+    android:layout_gravity="center_horizontal"
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="220dp"
-        android:background="@drawable/round_selector"
-        android:layout_height="220dp">
+        android:layout_width="match_parent"
+        android:background="@drawable/bg_dialog"
+        android:layout_alignParentBottom="true"
+        android:layout_height="200dp">
         <com.wulee.recordingibrary.view.VoiceLineView
             android:id="@+id/voicLine"
             android:layout_width="match_parent"
@@ -55,7 +56,7 @@
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:src="@mipmap/icon_complete" />
 
         <ImageView
@@ -64,7 +65,7 @@
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:src="@mipmap/icon_pause"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:layout_alignParentBottom="true" />
 
 
@@ -74,8 +75,8 @@
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
             android:src="@mipmap/icon_cancel"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:layout_alignParentBottom="true" />
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

@@ -18,7 +18,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
-        android:background="@drawable/round_selector"
         android:text="录音"
         android:textColor="#ffffff"
         android:padding="8dp" />
