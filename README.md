@@ -17,7 +17,7 @@
  Step 2. Add the dependency
 
 	dependencies {
-	        compile 'com.github.wulee510505:Recording:1.0.0'
+	        compile 'com.github.wulee510505:Recording:1.0.2'
 	}
 
         RecordVoiceButton  mBtRec = (RecordVoiceButton) findViewById(R.id.button_rec);
